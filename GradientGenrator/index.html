@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <!-- Design by foolishdeveloper.com -->
+  <!--=== 
+         For More Design go to 
+                   foolishdeveloper.com
+                                    ====-->
+<head>
+     <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Gradient Generator</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <style media="screen">
+      *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: "Poppins",sans-serif;
+}
+body{
+    height: 100vh;
+    background: #448aff;
+}
+.wrapper{
+    width: 410px;
+    background-color: #ffffff;
+    padding: 30px 30px;
+    border-radius: 8px;
+ 
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    box-shadow: 0 20px 25px rgba(60,60,100,0.15);
+}
+.wrapper h2{
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: 30px;
+  color: #0558b7;
+}
+#output-color{
+    width: 100%;
+    height: 35vmin;
+    border-radius: 5px;
+}
+#output-code{
+    background-color: #f1f5fc;
+    font-size: 2.7vmin;
+    font-weight: 500;
+    color: #044db4;
+    width: 100%;
+    padding: 15px 10px;
+    border-radius: 5px;
+    border: 1px solid #cfd5d5;
+    margin: 20px 0 40px 0;
+}
+.btn-container{
+    display: flex;
+    justify-content: space-around;
+}
+.btn-container button{
+    background-color: #2e80b3;
+    min-width: 42%;
+    padding: 12px 0;
+    color: #ffffff;
+    border-radius: 7px;
+    font-size: 3vmin;
+    margin-bottom: 8px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.btn-container button:nth-last-of-type(1){
+  background-color: #ae7617;
+}
+.btn-container button:nth-last-of-type(1):active{
+  background: #1bb916;
+}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+      <h2>Gradient Generator</h2>
+        <div id="output-color"></div>
+        <input type="text" id="output-code" readonly>
+        <div class="btn-container">
+            <button id="generate-btn">Generate</button>
+            <button id="copy-btn">Copy</button>
+        </div>
+    </div>
+    <!-- Script -->
+    <script>
+      let generateBtn = document.getElementById("generate-btn");
+let copyBtn = document.getElementById("copy-btn");
+let outputColor = document.getElementById("output-color");
+let outputCode = document.getElementById("output-code");
+let hexString = "0123456789abcdef";
+
+let randomColor = () => {
+    let hexCode = "#";
+    for( i=0; i<6; i++){
+        hexCode += hexString[Math.floor(Math.random() * hexString.length)];
+    }
+    return hexCode;
+}
+
+let generateGrad = () => {
+    let colorOne = randomColor();
+    let colorTwo = randomColor();
+    let angle = Math.floor(Math.random() * 360);
+    outputColor.style.background = `linear-gradient(${angle}deg, ${colorOne}, ${colorTwo})`;
+    outputCode.value = `background: linear-gradient(${angle}deg, ${colorOne}, ${colorTwo});`;
+}
+
+copyBtn.addEventListener("click", () => {
+    outputCode.select();
+    document.execCommand("copy");
+});
+
+generateBtn.addEventListener("click", generateGrad);
+window.onload = generateGrad;
+    </script>
+</body>
+</html>
